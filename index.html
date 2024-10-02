@@ -8,16 +8,214 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
-
+		<link rel="stylesheet" href="dist/theme/inspireeast.css">
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 	<body>
 		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+			<div id="slides" class="slides">
+				<!-- 
+					===========================================================
+					HEADER
+				-->
+				<header id='header' class="hidden">
+				</header>
+
+
+				<!-- 
+					===========================================================
+					TITLE
+				-->
+				<section class="is-title has-footer">
+					<h1>Click Your Way To Seamless Flow Callouts With External Services</h1>
+				</section>
+				
+
+				<!-- 
+					===========================================================
+					AGENDA
+				-->
+				<section class="has-footer">
+					<h1>Agenda</h1>
+					<ul>
+						<li>External Services - the what, why, and how</li>
+						<li>Cameras, lights, action!</li>
+						<li>Considerations</li>
+						<li>Resources</li>
+						<li>Q&amp;A</li>
+					</ul>
+				</section>
+
+
+				<!-- 
+					===========================================================
+					EXT SERVICE _ SAY WHAT
+				-->
+				<section class="has-footer">
+					<h1>External Services</h1>
+					<h2>Say what?</h2>
+					<p style="text-align:center">The low/no code way to access external business processes</p>
+					<div>
+						<img class="screenshot center" src="assets/imgs/ext-services-say-what2.png" />
+						<p class="attribution" style="text-align:center">Credit: UnofficialSF.com</p>
+					</div>
+				</section>
+
+
+
+				<!-- 
+					===========================================================
+					EXT SERVICE _ AND WHY
+				-->
+				<section class="has-footer">
+					<h1>External Services</h1>
+					<h2>And why?</h2>
+					<div class="r-stack">
+						<div>
+							<ul>
+								<li class="fragment" data-fragment-index="1" >APIs are cool!</li>
+								<li class="fragment" data-fragment-index="2" >Easier (safer) than HTTP Callouts</li>
+								<li class="fragment" data-fragment-index="4" >Service Discoverability</li>
+								<li class="fragment" data-fragment-index="5">Available all over the place</li>
+							</ul>
+						</div>
+						<div class="fragment fade-up"  data-fragment-index="3" >
+							<img class="fragment fade-out screenshot center width1000" data-fragment-index="4" src="assets/imgs/http-callout-data-types.png" />
+						</div>
+					</div>
+				</span>
+				</section>
+
+
+
+				<!-- 
+					===========================================================
+					EXT SERVICE _ SO HOW (1)
+				-->
+				<section class="has-footer">
+					<h1>External Services</h1>
+					<h2>So... how?</h2>
+					<div class="cols-1-3">
+						<ol>
+							<li class="fragment" data-fragment-index="1" >External Service Provider with REST API!</li>
+							<li class="fragment" data-fragment-index="2" >Specifications</li>
+						</ol>
+						<img class="center screenshot" src="assets/imgs/ext-service-building-blocks.png" />
+					</div>
+				</span>
+				</section>
+								 <!-- 
+					===========================================================
+					DEMO 3b - REFRESHVIEW SHOW LWS CODE
+				-->
+				<section id="refreshview-lws1" class="has-footer">			
+					<p class="filename">spec.yaml</p>
+					<pre class=""><code class="language-yaml" data-trim data-line-numbers="0|1|14|15-20|25-30|47-49|0">
+swagger: '2.0'
+info:
+  version: '2.0'
+  title: status.salesforce.com
+  description: 'status.salesforce.com'
+  x-vcap-service-name: status.salesforce.com
+basePath: /v1
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+tags:
+  - name: status.salesforce.com
+paths:
+  /instances/{key}/status:
+    get:
+      operationId: getStatus
+      summary: Retrieves the status
+      description: Retrieves the status for the API user
+      consumes:
+        - text/plain
+      produces:
+        - application/json
+      parameters:
+        - name: key
+          in: path
+          required: true
+          type: string
+          description: Instance key
+      responses:
+        '200':
+          description: The response when system finds a match
+          schema:
+            $ref: '#/definitions/status'
+definitions:
+  status:
+    required:
+      - releaseVersion
+    properties:
+      location:
+        type: string
+        example: "EMEA"
+      environment:
+        type: string
+        example: "production"
+      releaseVersion:
+        type: string
+        example: "Summer '24 Patch 19.7"
+      releaseNumber:
+        type: string
+        example: "23.234"
+      status:
+        type: string
+        enum: [OK, MAJOR_INCIDENT_CORE , MINOR_INCIDENT_CORE, MAINTENANCE_CORE, MAJOR_INCIDENT_NONCORE, MINOR_INCIDENT_NONCORE, MAINTENANCE_NONCORE]    
+					</code></pre>
+					<ul>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Standard components already appear to be handling updates</li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<!-- 
+					===========================================================
+					EXT SERVICE _ SO HOW (2)
+				-->
+				<section class="has-footer" data-transition="none">
+					<h1>External Services</h1>
+					<h2>So... how?</h2>
+					<div class="cols-1-3">
+						<ol>
+							<li>External Service Provider with REST API!</li>
+							<li>Specifications</li>
+							<li class="fragment" data-fragment-index="1" >Named Creds</li>
+							<li class="fragment" data-fragment-index="2" >Ext. Service</li>
+							<li class="fragment" data-fragment-index="3" >Build our flow</li>
+							<li class="fragment" data-fragment-index="4" >Fun &amp Profit!</li>
+						</ol>
+						<img class="center screenshot" src="assets/imgs/ext-service-building-blocks.webp" />
+					</div>
+				</span>
+				</section>
+
+				<!-- 
+					===========================================================
+					THANK YOU
+				-->
+				<section id="thankyou" class="title-slide" data-transition="fade-in fade-out">
+					<h1>THANK YOU</h1>
+				</section>
+
+
+				<!-- 
+					===========================================================
+					FOOTER
+				-->
+				<footer id='footer' class="hidden">
+					<!-- <p class="author"><a href="https://twitter.com/toddhalfpenny">@toddhalfpenny</a></p> -->					
+					<img src="assets/imgs/inspire-east-logo.png">
+				</footer>
 			</div>
 		</div>
 
@@ -25,16 +223,93 @@
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
 		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
+			// COMMENTED OUT STUFF FROM C'DREAMIN 22 TALK
 			Reveal.initialize({
+				controls: false,
 				hash: true,
+				center: false,
+				//maxScale: 1.8,
+				//margin: 0.18, // Reduced this for NAD as they have a slide background
+				margin: 0,
+				progress: false,
+				width: 1920,
+				height: 1200,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
 			});
+			Reveal.on( 'slidechanged', event => {
+				console.log('slidechanged', event.currentSlide);
+				if (event.currentSlide.className.includes('has-header')) {
+					showFooter();
+					showHeader();
+				} else {
+					hideFooter();
+					hideHeader();
+				}
+				if (event.currentSlide.className.includes('has-footer')) {
+					showFooter();
+				} else {
+					hideFooter();
+				}
+				if (event.currentSlide.className.includes('fullvideo')) {
+					hideBackground();
+				} else {
+					showBackground();
+				}
+				if (event.currentSlide.className.includes('is-title')) {
+					let el = document.getElementById('slides');
+					if (!el.classList.contains('slide-title')){ 
+						el.classList.add('slide-title');
+					};
+				} else {
+					let el = document.getElementById('slides');
+					if (el.classList.contains('slide-title')){ 
+						el.classList.remove('slide-title');
+					};
+				}
+			} );
+
+			function hideFooter() {
+				console.log('hideFooter');
+				let el = document.getElementById('footer');
+				console.log('footer', el);
+				if (el.className !== 'hidden'){ el.className = 'hidden' };
+			}
+
+			function showFooter() {
+				console.log('showFooter');
+				let el = document.getElementById('footer');
+				console.log('footer', el);
+				if (el.className && el.className === 'hidden'){ el.className = ''};
+			}
+
+			function hideHeader() {
+				console.log('hideHeader');
+				let el = document.getElementById('header');
+				console.log('header', el);
+				if (el.className !== 'hidden'){ el.className = 'hidden' };
+			}
+
+			function showHeader() {
+				console.log('showHeader');
+				let el = document.getElementById('header');
+				console.log('header', el);
+				if (el.className && el.className === 'hidden'){ el.className = ''};
+			}
+
+			function showBackground() {
+				console.log('showBackground');
+				let el = document.getElementById('slides');
+				el.classList.remove("hide-background");
+			}
+
+			function hideBackground() {
+				console.log('hideBackground');
+				let el = document.getElementById('slides');
+				el.classList.add("hide-background");
+			}
 		</script>
 	</body>
 </html>
